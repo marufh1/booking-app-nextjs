@@ -8,11 +8,12 @@ import { AiOutlineMenu } from "react-icons/ai";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 
+import { SafeUser } from "@/app/types";
 import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
 
 interface UserMenuProps {
-  currentUser?: null;
+  currentUser?: SafeUser | null;
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
@@ -51,7 +52,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             cursor-pointer
           "
         >
-          Airbnb your home
+          Booking in your home
         </div>
         <div
           onClick={toggleOpen}
@@ -73,7 +74,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
         >
           <AiOutlineMenu />
           <div className="hidden md:block">
-            <Avatar src={currentUser} />
+            <Avatar src={currentUser?.image} />
           </div>
         </div>
       </div>
