@@ -84,7 +84,6 @@ const RegisterModal = () => {
               hover:underline
             "
           >
-            {" "}
             Log in
           </span>
         </p>
