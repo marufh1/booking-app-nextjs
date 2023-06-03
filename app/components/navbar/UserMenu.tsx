@@ -7,8 +7,9 @@ import { AiOutlineMenu } from "react-icons/ai";
 
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
-
+import useRentModal from "@/app/hooks/useRentModal";
 import { SafeUser } from "@/app/types";
+
 import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
 
@@ -21,6 +22,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
+  const rentModal = useRentModal();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -32,7 +34,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     if (!currentUser) {
       return loginModal.onOpen();
     }
-  }, [loginModal, currentUser]);
+
+    rentModal.onOpen();
+  }, [loginModal, rentModal, currentUser]);
 
   return (
     <div className="relative">
@@ -52,7 +56,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             cursor-pointer
           "
         >
-          Booking in your home
+          Booking at your home
         </div>
         <div
           onClick={toggleOpen}
@@ -100,6 +104,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                 <MenuItem label="My favorites" onClick={() => router.push("/favorites")} />
                 <MenuItem label="My reservations" onClick={() => router.push("/reservations")} />
                 <MenuItem label="My properties" onClick={() => router.push("/properties")} />
+                <MenuItem label="Booking at your home" onClick={rentModal.onOpen} />
                 <hr />
                 <MenuItem label="Logout" onClick={() => signOut()} />
               </>
